@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAngsuran" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="95173fb8-5d7d-4100-8e77-63cb0842edb7">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="74"/>
+	<parameter name="noPinjam" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     akun_pinjaman.`no_pinjaman` AS akun_pinjaman_no_pinjaman,
+     akun_pinjaman.`no_anggota` AS akun_pinjaman_no_anggota,
+     akun_pinjaman.`status` AS akun_pinjaman_status,
+     anggota.`no_anggota` AS anggota_no_anggota,
+     anggota.`nama` AS anggota_nama,
+     pinjaman.`id_pinjam` AS pinjaman_id_pinjam,
+     pinjaman.`no_pinjam` AS pinjaman_no_pinjam,
+     pinjaman.`jumlah_pinjaman` AS pinjaman_jumlah_pinjaman,
+     pinjaman.`total_angsuran` AS pinjaman_total_angsuran,
+     angsuran_pinjaman.`id_angsuran` AS angsuran_pinjaman_id_angsuran,
+     angsuran_pinjaman.`no_pinjaman` AS angsuran_pinjaman_no_pinjaman,
+     angsuran_pinjaman.`angsuran_ke` AS angsuran_pinjaman_angsuran_ke,
+     angsuran_pinjaman.`tanggal_bayar` AS angsuran_pinjaman_tanggal_bayar,
+     angsuran_pinjaman.`biaya_angsuran` AS angsuran_pinjaman_biaya_angsuran,
+     angsuran_pinjaman.`sisa_pinjaman` AS angsuran_pinjaman_sisa_pinjaman,
+     angsuran_pinjaman.`kode_user` AS angsuran_pinjaman_kode_user
+FROM
+     `angsuran_pinjaman` angsuran_pinjaman
+
+INNER JOIN `akun_pinjaman` akun_pinjaman ON angsuran_pinjaman.`no_pinjaman`=akun_pinjaman.`no_pinjaman`
+INNER JOIN `pinjaman` pinjaman ON angsuran_pinjaman.`no_pinjaman`=pinjaman.`no_pinjam`
+INNER JOIN `anggota` anggota ON akun_pinjaman.`no_anggota`=anggota.`no_anggota`
+
+
+WHERE  angsuran_pinjaman.`no_pinjaman` = $P{noPinjam}]]>
+	</queryString>
+	<field name="akun_pinjaman_no_pinjaman" class="java.lang.String"/>
+	<field name="akun_pinjaman_no_anggota" class="java.lang.String"/>
+	<field name="akun_pinjaman_status" class="java.lang.String"/>
+	<field name="anggota_no_anggota" class="java.lang.String"/>
+	<field name="anggota_nama" class="java.lang.String"/>
+	<field name="pinjaman_id_pinjam" class="java.lang.Integer"/>
+	<field name="pinjaman_no_pinjam" class="java.lang.String"/>
+	<field name="pinjaman_jumlah_pinjaman" class="java.lang.Double"/>
+	<field name="pinjaman_total_angsuran" class="java.lang.Double"/>
+	<field name="angsuran_pinjaman_id_angsuran" class="java.lang.Integer"/>
+	<field name="angsuran_pinjaman_no_pinjaman" class="java.lang.String"/>
+	<field name="angsuran_pinjaman_angsuran_ke" class="java.lang.Integer"/>
+	<field name="angsuran_pinjaman_tanggal_bayar" class="java.sql.Date"/>
+	<field name="angsuran_pinjaman_biaya_angsuran" class="java.lang.Double"/>
+	<field name="angsuran_pinjaman_sisa_pinjaman" class="java.lang.Double"/>
+	<field name="angsuran_pinjaman_kode_user" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="e6e923ab-0485-4d81-98f7-356965841676"/>
+				<staticText>
+					<reportElement x="20" y="20" width="333" height="43" forecolor="#FFFFFF" uuid="089e3103-d1a6-4c85-896c-2b6f78d2d87c"/>
+					<textElement>
+						<font size="28" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Koperasi Simpan Pinjam]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="b702e9e7-b70e-4913-93e3-074b8d40cdf4"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Laporan Angsuran]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="44">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="2a2ce6da-af42-4bb0-be66-6ac60e03542f"/>
+				<textElement textAlignment="Justified">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. Pinjam]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="300" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="731e28aa-1a2c-49d1-b4c2-c816fb977a65"/>
+				<textElement textAlignment="Justified">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. Anggota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="300" y="21" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="51b33051-1e72-46a0-a0c9-89e8e9e81d8f"/>
+				<textElement textAlignment="Justified">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="21" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="309d71bd-6cdf-44e3-aebf-880878f7efd2"/>
+				<textElement textAlignment="Justified">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="111" y="0" width="100" height="20" uuid="7c9a6748-5de5-4adb-8a30-7483a35be1db"/>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pinjaman_no_pinjam}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="21" width="100" height="20" uuid="4b0787dc-2e34-47fa-a25c-08940c0275be"/>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{akun_pinjaman_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="0" width="100" height="20" uuid="9e41fd7d-b642-4952-9d47-97a08b535933"/>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{akun_pinjaman_no_anggota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="21" width="100" height="20" uuid="7398d101-19b7-40f8-96d7-c71f3bbfbab5"/>
+				<textElement textAlignment="Justified">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{anggota_nama}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-20" y="41" width="595" height="1" forecolor="#666666" uuid="edc90b5a-2374-4cb8-83d2-5cb353276314"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="097813cd-d647-4b96-9e0b-5b1774bf221a"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="779e9100-6674-498d-8b5a-550793ad4c65"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Angsuran Ke]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="111" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="24a1dd78-2fe2-4455-bf37-d8e5220cfcd6"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="222" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="a4fdd202-e1ca-4992-99ac-526fbc0dbb0e"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Biaya Angsur]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="333" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="2af83bbd-12e7-481b-8fce-bfe300ba2d9a"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sisa Pinjaman]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="444" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="856beb92-b3b8-4c14-9425-c4d6e0563e7a"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[User]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="9be83a67-ebe1-4991-9f7f-4d7153fb0df4"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="111" height="20" uuid="dddc3885-a163-4c33-9349-337ac6967f30"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{angsuran_pinjaman_angsuran_ke}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="111" y="0" width="111" height="20" uuid="a21cfdbc-466c-4945-a0e9-606e9851001f"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yy").format($F{angsuran_pinjaman_tanggal_bayar})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="222" y="0" width="111" height="20" uuid="b8c03545-b174-4148-82a7-4be070e176f5"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{angsuran_pinjaman_biaya_angsuran}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="333" y="0" width="111" height="20" uuid="41feca42-e49b-452d-a5e2-649f9a54a062"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{angsuran_pinjaman_sisa_pinjaman}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="444" y="0" width="111" height="20" uuid="f6bb13e9-c54c-40cd-bc7f-f0e8cd28981f"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{angsuran_pinjaman_kode_user}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="1ad27f82-d51f-4fbd-8357-101f9997b5eb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="d19d4eb4-eb79-487c-a25d-008a2d48febb"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="1a8e7ed9-5689-4f61-b90c-bfffee607e39"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
